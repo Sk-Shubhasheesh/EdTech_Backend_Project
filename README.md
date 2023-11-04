@@ -32,6 +32,10 @@ The back end of EdTech uses a range of data models and database schemas to manag
 
 * Overall, the back-end of EdTech is designed to provide a robust and scalable solution for an ed-tech platform, with a focus on security, reliability, and ease of use. By using the right frameworks, libraries, and tools, we can ensure that the platform functions smoothly and provides an optimal user experience for all its users.
 
+## Model Overviwe
+![models](https://github.com/Sk-Shubhasheesh/EdTech_Backend_Project/assets/72690479/5bd02baf-74ef-4438-b8d3-026fdd73a758)
+
+
 ### Package Installation for EdTech Project
 1. npm i express
 2. npm i nodemon
