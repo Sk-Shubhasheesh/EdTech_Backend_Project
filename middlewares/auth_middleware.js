@@ -17,7 +17,7 @@ exports.auth = async(req, re, next) => {
 
       //verify the token using secret key
       try {
-        const decode = await jwt.verify(token, process.env.JWT_SECRET);
+        const decode = jwt.verify(token, process.env.JWT_SECRET);
         req.user = decode;
       } catch (error) {
         return res.status(401).json({
@@ -34,3 +34,5 @@ exports.auth = async(req, re, next) => {
     });
     }
 }
+
+
