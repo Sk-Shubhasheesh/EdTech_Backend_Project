@@ -36,7 +36,7 @@ exports.auth = async(req, re, next) => {
 }
 
 // isStudent middleware
-exports.isStudents = async(req, res, next) => {
+exports.isStudent = async(req, res, next) => {
     try {
         if(req.user.accountType != "Student"){
             return res.status(400).json({
@@ -44,11 +44,30 @@ exports.isStudents = async(req, res, next) => {
                 message: 'This is a protected route for Student only',
             });
         }
+        next();
+    } catch (error) {
+        return res.status(500).json({
+            success:false,
+            message: 'User role cannot be verified, plese try again'
+        });
+    }
+}
+
+// isInstructor middleware
+exports.isInstructor = async(req, res, next) => {
+    try {
+        if(req.user.accountType != "isInstructor"){
+            return res.status(400).json({
+                success:false,
+                message: 'This is a protected route for Instructor only',
+            });
+        }
         next()
     } catch (error) {
         return res.status(500).json({
             success:false,
-            message: 'User role csnnot be verified, plese try again'
+            message: 'User role cannot be verified, plese try again'
         });
     }
 }
+
