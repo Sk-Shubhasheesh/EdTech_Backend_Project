@@ -23,7 +23,14 @@ exports.createSection = async (req, res) => {
         },
       },
       { new: true }
-    ).populate('courseContent');
+    ).populate({
+      path: "courseContent",
+      populate: {
+        path: "subSection",
+      },
+    })
+    .exec();   //  this code is telling Mongoose to retrieve documents from the "courseContent" collection and, for each document, populate the "subSection" field with the corresponding documents from the "subSection" collection. 
+    
     // return response
     return res.status(200).json({
       success: true,
