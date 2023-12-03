@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema({
-  firtsName: {
+  firstName: {
      type: String,
      required: true,
      trim: true, // removes whitespace from the beginning and end of a string
