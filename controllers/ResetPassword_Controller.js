@@ -1,11 +1,12 @@
 const User = require("../models/User");
 const mailSender = require("../utils/mailSender");
 const bcrypt = require("bcrypt");
+const crypto = require("crypto");
 // reset PasswordToken
 exports.resetPasswordToken = async (req, res) => {
   try {
     // fetch email from request body
-    const email = req.body;
+    const email = req.body.email;
     // email validation
     const user = await User.findOne({ email: email });
     if (!user) {
@@ -15,7 +16,7 @@ exports.resetPasswordToken = async (req, res) => {
       });
     }
     // generate token
-    const token = crypto.randomUUID();
+    const token = crypto.randomBytes(20).toString("hex");
     // adding token and expiration time into User
     const updateDetails = await User.findOneAndUpdate(
       { email: email },
@@ -23,7 +24,7 @@ exports.resetPasswordToken = async (req, res) => {
       { new: true } // it returns the update document into response
     );
     // create url
-    const url = `http://localhost:4000/update-password/${token}`;
+    const url = `http://localhost:3000/update-password/${token}`;
 
     // send mail with containing url
     await mailSender(email, "Password Rest Link", `Password Reset Link:${url}`);

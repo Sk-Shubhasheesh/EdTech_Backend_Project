@@ -1,6 +1,6 @@
 const Profile = require("../models/Profile");
 const User = require("../models/User");
-
+const { uploadImageToCloudinary } = require("../utils/imageUploader")
 exports.updateProfile = async(req, res) => {
     try {
         // get data
@@ -75,7 +75,7 @@ exports.getAllUserDetails = async(req, res) => {
     try {
          const id = req.user.id;
          // validation
-         const userDetails = await User.findById({id}).populate("additionalDetails").exec();
+         const userDetails = await User.findById(id).populate("additionalDetails").exec();
          if(!userDetails){
             return res.status(404).json({
                 success:false,
